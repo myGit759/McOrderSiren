@@ -1,4 +1,4 @@
-# 📒McOrderSiren
+# 📒 McOrderSiren
 🔑 사용한 기술 : JSP, Java, Tomcat
 
 🔑 간단 소개   : 2인으로 진행한 미니프로젝트
