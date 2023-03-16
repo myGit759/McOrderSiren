@@ -1,0 +1,232 @@
+drop table mc_order;
+drop table mc_member;
+drop table mc_product;
+drop SEQUENCE ord_seq;
+drop SEQUENCE pro_seq;
+drop SEQUENCE mem_seq;
+
+create sequence mem_seq
+    start with 1
+    maxvalue 999999999
+    increment by 1
+    nocache
+    nocycle;
+    
+create table mc_Member (
+    idx          number         default mem_seq.nextval primary key,
+    Id           varchar2(100)  not null unique,
+    Password     varchar2(100)  not null,
+    name         VARCHAR2(100)  not null,
+    age          number         not null,
+    phonenum     varchar2(100)  not null,
+    email        varchar2(100)  not null,
+    gender       varchar2(10)   not null check(gender in ('M' ,'F')),
+    point        number         default 50000
+   ); 
+
+
+create sequence pro_seq
+    start with 1
+    maxvalue 99999999
+    increment by 1
+    nocache
+    nocycle;
+    
+create table mc_Product (
+    idx                 number        default pro_seq.nextval primary key,
+    category            varchar2(100) not null,
+    name                varchar2(100) not null unique,
+    price               number        not null,
+    imgPath             varchar2(100)   ,
+    count               number          default 0
+    );
+    
+    
+create sequence ord_seq
+    start with 1
+    maxvalue 999999999
+    increment by 1
+    nocache
+    nocycle;
+
+    
+create table mc_Order(
+    idx             number      default ord_seq.nextval primary key,
+    mem_idx         number      ,
+    sales         number      ,
+    ord_date        date        default sysdate,
+    
+    constraint fk_mc_order_mem
+    foreign key(mem_idx)
+    references mc_Member(idx)
+    on delete cascade);
+    
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('admin','admin','관리자','010-1234-5678','abc123@naver.com','M',28);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test1','test1','백희은','010-1084-9224','wfe31@naver.com','F',51);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test2','test2','오보경','010-6471-7933','fefwe561@naver.com','F',32);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test3','test3','예춘자','010-5235-4649','fsdfe8897@naver.com','F',35);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test4','test4','봉인혁','010-4969-4785','hrrty87@naver.com','M',24);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test5','test5','남궁경원','010-1812-4606','gdgy14@naver.com','M',21);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test6','test6','박수근','010-9655-1990','f6gger8@naver.com','F',26);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test7','test7','황보원정','010-6426-9139','f6er78h@naver.com','M',28);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test8','test8','김석준','010-7779-2581','6h48th1g@naver.com','M',29);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test9','test9','유예성','010-5268-3659','3tfhth@naver.com','M',28);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test10','test10','한우석','010-5928-5712','htrh77@naver.com','M',30);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test11','test11','황현철','010-2565-6433','fryyrt54654@naver.com','M',18);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test12','test12','권용일','010-9250-8876','g65g@naver.com','M',17);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test13','test13','설윤준','010-3205-7986','g65ergg1h@naver.com','M',15);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test14','test14','황보호석','010-5772-5396','fdg5er54@naver.com','M',16);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test15','test15','류선민','010-3937-8639','gtytr12@naver.com','F',19);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test16','test16','심민자','010-1613-6345','df5w4@naver.com','F',20);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test17','test17','한진환','010-4479-9572','sdfwet1f@naver.com','M',22);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test18','test18','남예성','010-1205-8143','il5uk7@naver.com','M',30);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test19','test19','권윤태','010-6948-7651','j8t1kjh@naver.com','M',34);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test20','test20','설경식','010-9520-5689','k1s4hjgi@naver.com','M',35);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test21','test21','이진우','010-4790-8029','rty51fh7@naver.com','M',35);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test22','test22','권준호','010-4395-3658','g5tu21bn@naver.com','M',40);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test23','test23','한지선','010-1357-2193','f6er2rt@naver.com','F',45);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test24','test24','서수빈','010-6212-6927','kyts12@naver.com','F',41);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test25','test25','백소민','010-2969-4989','rg55y4@naver.com','F',43);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test26','test26','전영숙','010-4419-6543','t5y4j1@naver.com','F',44);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test27','test27','류종환','010-6318-9492','fgu41d@naver.com','M',55);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test28','test28','신윤혁','010-9476-7737','d5y1dfg2@naver.com','M',21);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test29','test29','문주연','010-3516-6189','y1yt2@naver.com','F',22);
+insert into mc_Member(id,password,name,phonenum,email,gender,age) values('test30','test30','김주윤','010-1284-3006','df1r2t1@naver.com','M',35);
+
+insert into mc_Order(mem_idx,sales,ord_date) values(16,31200,'2020-10-01');
+insert into mc_Order(mem_idx,sales,ord_date) values(17,46500,'2020-10-07');
+insert into mc_Order(mem_idx,sales,ord_date) values(26,13500,'2020-10-10');
+insert into mc_Order(mem_idx,sales,ord_date) values(24,5400,'2020-10-19');
+insert into mc_Order(mem_idx,sales,ord_date) values(6,35400,'2020-10-29');
+insert into mc_Order(mem_idx,sales,ord_date) values(4,1200,'2020-11-07');
+insert into mc_Order(mem_idx,sales,ord_date) values(19,4100,'2020-11-12');
+insert into mc_Order(mem_idx,sales,ord_date) values(7,25800,'2020-11-22');
+insert into mc_Order(mem_idx,sales,ord_date) values(29,4500,'2020-11-27');
+insert into mc_Order(mem_idx,sales,ord_date) values(22,1500,'2020-12-22');
+insert into mc_Order(mem_idx,sales,ord_date) values(17,500,'2020-12-23');
+insert into mc_Order(mem_idx,sales,ord_date) values(24,1500,'2020-12-24');
+insert into mc_Order(mem_idx,sales,ord_date) values(23,12500,'2020-12-28');
+insert into mc_Order(mem_idx,sales,ord_date) values(6,1600,'2021-01-02');
+insert into mc_Order(mem_idx,sales,ord_date) values(17,1300,'2021-01-08');
+insert into mc_Order(mem_idx,sales,ord_date) values(22,13500,'2021-01-10');
+insert into mc_Order(mem_idx,sales,ord_date) values(15,13500,'2021-01-14');
+insert into mc_Order(mem_idx,sales,ord_date) values(4,13200,'2021-01-14');
+insert into mc_Order(mem_idx,sales,ord_date) values(26,132100,'2021-01-15');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,4500,'2021-01-20');
+insert into mc_Order(mem_idx,sales,ord_date) values(28,13500,'2021-01-26');
+insert into mc_Order(mem_idx,sales,ord_date) values(26,8600,'2021-02-15');
+insert into mc_Order(mem_idx,sales,ord_date) values(18,4600,'2021-02-22');
+insert into mc_Order(mem_idx,sales,ord_date) values(6,13500,'2021-03-06');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,13600,'2021-03-07');
+insert into mc_Order(mem_idx,sales,ord_date) values(29,4300,'2021-03-12');
+insert into mc_Order(mem_idx,sales,ord_date) values(6,5400,'2021-03-26');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,2100,'2021-03-28');
+insert into mc_Order(mem_idx,sales,ord_date) values(4,1200,'2021-04-05');
+insert into mc_Order(mem_idx,sales,ord_date) values(4,32100,'2021-04-17');
+insert into mc_Order(mem_idx,sales,ord_date) values(13,21500,'2021-04-22');
+insert into mc_Order(mem_idx,sales,ord_date) values(23,21500,'2021-05-18');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,54700,'2021-05-28');
+insert into mc_Order(mem_idx,sales,ord_date) values(5,45700,'2021-06-21');
+insert into mc_Order(mem_idx,sales,ord_date) values(18,13500,'2021-08-12');
+insert into mc_Order(mem_idx,sales,ord_date) values(14,30400,'2021-08-16');
+insert into mc_Order(mem_idx,sales,ord_date) values(8,20100,'2021-08-17');
+insert into mc_Order(mem_idx,sales,ord_date) values(14,20100,'2021-08-26');
+insert into mc_Order(mem_idx,sales,ord_date) values(18,32400,'2021-09-01');
+insert into mc_Order(mem_idx,sales,ord_date) values(29,21000,'2021-09-02');
+insert into mc_Order(mem_idx,sales,ord_date) values(10,5000,'2021-09-05');
+insert into mc_Order(mem_idx,sales,ord_date) values(27,36000,'2021-09-09');
+insert into mc_Order(mem_idx,sales,ord_date) values(13,50400,'2021-09-20');
+insert into mc_Order(mem_idx,sales,ord_date) values(23,84000,'2021-09-20');
+insert into mc_Order(mem_idx,sales,ord_date) values(18,12000,'2021-10-11');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,12000,'2021-10-17');
+insert into mc_Order(mem_idx,sales,ord_date) values(8,50300,'2021-10-31');
+insert into mc_Order(mem_idx,sales,ord_date) values(8,6000,'2021-11-01');
+insert into mc_Order(mem_idx,sales,ord_date) values(13,50000,'2021-11-01');
+insert into mc_Order(mem_idx,sales,ord_date) values(4,40200,'2021-11-07');
+insert into mc_Order(mem_idx,sales,ord_date) values(24,3000,'2021-11-08');
+insert into mc_Order(mem_idx,sales,ord_date) values(21,15000,'2021-11-10');
+insert into mc_Order(mem_idx,sales,ord_date) values(5,13000,'2021-11-15');
+insert into mc_Order(mem_idx,sales,ord_date) values(22,14100,'2021-11-24');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,15000,'2021-11-30');
+insert into mc_Order(mem_idx,sales,ord_date) values(3,13600,'2021-12-04');
+insert into mc_Order(mem_idx,sales,ord_date) values(17,10300,'2021-12-04');
+insert into mc_Order(mem_idx,sales,ord_date) values(22,11000,'2021-12-06');
+insert into mc_Order(mem_idx,sales,ord_date) values(25,12400,'2021-12-06');
+insert into mc_Order(mem_idx,sales,ord_date) values(5,25400,'2021-12-15');
+insert into mc_Order(mem_idx,sales,ord_date) values(19,26400,'2021-12-20');
+insert into mc_Order(mem_idx,sales,ord_date) values(28,21300,'2022-01-07');
+insert into mc_Order(mem_idx,sales,ord_date) values(3,21400,'2022-01-25');
+insert into mc_Order(mem_idx,sales,ord_date) values(5,21000,'2022-01-30');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,31500,'2022-02-08');
+insert into mc_Order(mem_idx,sales,ord_date) values(5,38700,'2022-02-13');
+insert into mc_Order(mem_idx,sales,ord_date) values(2,10200,'2022-02-23');
+insert into mc_Order(mem_idx,sales,ord_date) values(23,30100,'2022-02-24');
+insert into mc_Order(mem_idx,sales,ord_date) values(17,20100,'2022-02-28');
+insert into mc_Order(mem_idx,sales,ord_date) values(13,30100,'2022-03-19');
+insert into mc_Order(mem_idx,sales,ord_date) values(26,30200,'2022-03-24');
+insert into mc_Order(mem_idx,sales,ord_date) values(28,2400,'2022-03-27');
+insert into mc_Order(mem_idx,sales,ord_date) values(22,8900,'2022-03-29');
+insert into mc_Order(mem_idx,sales,ord_date) values(13,7500,'2022-04-12');
+insert into mc_Order(mem_idx,sales,ord_date) values(17,66000,'2022-04-15');
+insert into mc_Order(mem_idx,sales,ord_date) values(9,32100,'2022-04-19');
+insert into mc_Order(mem_idx,sales,ord_date) values(27,2100,'2022-05-01');
+insert into mc_Order(mem_idx,sales,ord_date) values(24,22400,'2022-06-02');
+insert into mc_Order(mem_idx,sales,ord_date) values(9,32400,'2022-06-05');
+insert into mc_Order(mem_idx,sales,ord_date) values(28,21000,'2022-06-06');
+insert into mc_Order(mem_idx,sales,ord_date) values(7,54100,'2022-06-10');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,21000,'2022-06-11');
+insert into mc_Order(mem_idx,sales,ord_date) values(4,32400,'2022-06-21');
+insert into mc_Order(mem_idx,sales,ord_date) values(29,30200,'2022-06-29');
+insert into mc_Order(mem_idx,sales,ord_date) values(24,20300,'2022-06-30');
+insert into mc_Order(mem_idx,sales,ord_date) values(20,10500,'2022-07-18');
+insert into mc_Order(mem_idx,sales,ord_date) values(22,7000,'2022-08-03');
+insert into mc_Order(mem_idx,sales,ord_date) values(23,6100,'2022-08-24');
+insert into mc_Order(mem_idx,sales,ord_date) values(20,6700,'2022-09-06');
+insert into mc_Order(mem_idx,sales,ord_date) values(30,5100,'2022-09-10');
+insert into mc_Order(mem_idx,sales,ord_date) values(27,9000,'2022-09-10');
+insert into mc_Order(mem_idx,sales,ord_date) values(10,8000,'2022-09-28');
+insert into mc_Order(mem_idx,sales,ord_date) values(23,9700,'2022-09-30');
+insert into mc_Order(mem_idx,sales,ord_date) values(19,5400,'2022-11-04');
+insert into mc_Order(mem_idx,sales,ord_date) values(12,6000,'2022-11-06');
+insert into mc_Order(mem_idx,sales,ord_date) values(25,20000,'2022-11-29');
+insert into mc_Order(mem_idx,sales,ord_date) values(25,30000,'2022-11-30');
+insert into mc_Order(mem_idx,sales,ord_date) values(18,54000,'2022-12-06');
+insert into mc_Order(mem_idx,sales,ord_date) values(25,54600,'2022-12-12');
+insert into mc_Order(mem_idx,sales,ord_date) values(6,31300,'2022-12-16');
+
+
+
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','더블 비프 미트 칠리 버거',8300,'더블비프미트칠리.png',123);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','미트칠리 비엘티 버거',7800,'비엘티.png',213);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','맥크리스피™ 디럭스 버거',7500,'맥크리스피디럭스.png',213);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','맥크리스피™ 클래식 버거',6700,'맥크리스피클래식.png',232);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','트리플 치즈버거',6600,'트리플치즈.png',213);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','더블 불고기 버거',5300,'더블불고기.png',1020);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','빅맥®',5700,'빅맥.png',2100);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','맥스파이시® 상하이 버거',5700,'상하이.png',1500);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','1955® 버거',6800,'1955.png',1200);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','맥치킨® 모짜렐라',5800,'모짜렐라.png',540);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','더블 쿼터파운더® 치즈',8200,'더블쿼터.png',654);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','쿼터파운더® 치즈',6300,'QPC.png',843);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','맥치킨®',4300,'맥치킨.png',212);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','에그 불고기 버거',4300,'에그불고기.png',513);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','불고기 버거',3300,'불고기.png',2000);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','슈슈 버거',5500,'슈슈.png',315);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','슈비 버거',6600,'슈비.png',435);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','베이컨 토마토 디럭스',6600,'베토디.png',154);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','더블 필레 오 피쉬',6000,'더블필레오피쉬.png',354);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','필레 오 피쉬',4500,'필레오피쉬.png',154);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','치즈버거',3300,'치즈버거.png',213);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','더블 치즈버거',5300,'더블치즈버거.png',546);
+insert into mc_product(category, name, price, imgpath,count) values ( '버거','햄버거',3000,'햄버거.png',848);
+insert into mc_product(category, name, price, imgpath,count) values ( '사이드','맥너겟® 4조각',3000,'너겟4.png',65);
+insert into mc_product(category, name, price, imgpath,count) values ( '사이드','맥너겟® 6조각',4000,'너겟6.png',321);
+insert into mc_product(category, name, price, imgpath,count) values ( '사이드','맥스파이시® 치킨텐더 4조각',5800,'텐더4.png',21);
+insert into mc_product(category, name, price, imgpath,count) values ( '사이드','맥스파이시® 치킨텐더 2조각',3500,'텐더2.png',212);
+insert into mc_product(category, name, price, imgpath,count) values ( '사이드','후렌치 후라이',2600,'후렌치후라이.png',321);
+insert into mc_product(category, name, price, imgpath,count) values ( '음료','콜라',2200,'콜라.png',12345);
+insert into mc_product(category, name, price, imgpath,count) values ( '음료','환타',2200,'환타.png',321);
+insert into mc_product(category, name, price, imgpath,count) values ( '음료','제로콜라',2200,'제로콜라.png',1234);
+insert into mc_product(category, name, price, imgpath,count) values ( '음료','스프라이트',2200,'스프라이트.png',123);
+
+commit;

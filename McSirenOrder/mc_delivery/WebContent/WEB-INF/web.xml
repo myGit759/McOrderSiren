@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Resource-ref>
+	<res-ref-name>jdbc/oracle</res-ref-name>
+	<res-auth>Container</res-auth>
+	<res-type>javax.sql.DataSource</res-type>
+
+</Resource-ref>
